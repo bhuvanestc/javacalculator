@@ -1,66 +1,60 @@
 package org.example;
-
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int option;
-        Double no1, no2, result;
-        Scanner input = new Scanner(System.in);
-        System.out.println("*****************************");
-        System.out.println("Welcome to the calculator app");
-        System.out.println("*****************************");
-        boolean exit = false;
-        while (!exit) {
-            menu();
-            System.out.println("Please choose the operation between 1 to 5");
-            option = input.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        char operator;
+        boolean quit = false;
 
-            if (option >= 1) {
-                System.out.println("Enter the first number");
-                no1 = input.nextDouble();
-                System.out.println("Enter the second number");
-                no2 = input.nextDouble();
-                switch (option) {
-                    case 1:
-                        result = no1 + no2;
-                        System.out.println(no1 + "+" + no2 + "=" + result);
+        do {
+            System.out.print("Enter any character to start or 'q' to quit: ");
+            operator = scanner.next().charAt(0);
+
+            if (operator != 'q') {
+                System.out.print("Enter the first number: ");
+                double num1 = scanner.nextDouble();
+
+                System.out.print("Enter the second number: ");
+                double num2 = scanner.nextDouble();
+
+                double result;
+
+                switch (operator) {
+                    case '+':
+                        result = num1 + num2;
+                        System.out.println("Result: " + result);
                         break;
-                    case 2:
-                        result = no1 - no2;
-                        System.out.println(no1 + "-" + no2 + "=" + result);
+                    case '-':
+                        result = num1 - num2;
+                        System.out.println("Result: " + result);
                         break;
-                    case 3:
-                        result = no1 * no2;
-                        System.out.println(no1 + "*" + no2 + "=" + result);
+                    case '*':
+                        result = num1 * num2;
+                        System.out.println("Result: " + result);
                         break;
-                    case 4:
-                        result = no1 / no2;
-                        System.out.println(no1 + "/" + no2 + "=" + result);
-                        break;
-                    case 5:
-                        exit = true;
-                        System.out.println("Exit ");
+                    case '/':
+                        if (num2 != 0) {
+                            result = num1 / num2;
+                            System.out.println("Result: " + result);
+                        } else {
+                            System.out.println("Error: Division by zero!");
+                        }
                         break;
                     default:
-                        System.out.println("Entered wrong option");
-
+                        System.out.println("Invalid operator!");
+                        continue;
                 }
+
+                // Perform calculations or other operations here
+                // ...
+
             } else {
+                quit = true;
                 System.out.println("Thanks for using calculator");
             }
-        }
+        } while (!quit);
 
-        System.out.println("Thanks for using calculator");
-    }
-
-    public static void menu() {
-        System.out.println("1.Addition");
-        System.out.println("2.Subtraction");
-        System.out.println("3.Multiplication");
-        System.out.println("4.Division");
-        System.out.println("5.Exit");
+        scanner.close();
     }
 }
-
-
